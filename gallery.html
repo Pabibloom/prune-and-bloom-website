@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Prune and Bloom | Garden Transformation Services</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #7AB730;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        /* Accent Colors */
+        .accent-green {
+            color: #7AB730; /* Lime green */
+        }
+        
+        .accent-orange {
+            color: #FF9E00; /* Squash orange */
+        }
+        
+        .accent-blue {
+            color: #4A89DC; /* Fine blue */
+        }
+        
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, #7AB730, #FF9E00, #4A89DC);
+            margin: 30px 0;
+            width: 100%;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo .bloom {
+            color: #7AB730;
+        }
+        
+        .logo .prune {
+            color: #FF9E00;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: #f5f5f5;
+            color: #7AB730;
+        }
+        
+        .active {
+            color: #7AB730;
+            font-weight: 600;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/random/1600x400/?garden,flowers') no-repeat center center/cover;
+            height: 40vh;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            letter-spacing: 2px;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            background-color: #fff;
+        }
+        
+        .gallery-intro {
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Filter Buttons */
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            background-color: #f9f9f9;
+            border: none;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #7AB730;
+            color: #fff;
+        }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            height: 300px;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-category {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background-color: #f9f9f9;
+        }
+        
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+        }
+        
+        /* Call to Action */
+        .cta {
+            text-align: center;
+            background-color: #fff;
+        }
+        
+        .cta h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .cta .btn {
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .footer-logo .bloom {
+            color: #7AB730;
+        }
+        
+        .footer-logo .prune {
+            color: #FF9E00;
+        }
+        
+        .footer-links ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-left: 20px;
+        }
+        
+        .footer-links ul li a {
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #7AB730;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links ul {
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .footer-links ul li {
+                margin: 0 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 24px;
+            }
+            
+            .gallery-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 80%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html"><span class="prune">Prune</span> and <span class="bloom">Bloom</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><span class="accent-green">Gallery</span></h1>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-intro">
+                <h2>Garden <span class="accent-orange">Transformations</span></h2>
+                <p>Browse through a selection of garden transformations and projects, showcasing the journey from vision to reality. Each garden tells a unique story of collaboration, creativity, and care.</p>
+            </div>
+            
+            <div class="gallery-filter">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Maintenance</button>
+                <button class="filter-btn">Enhancement</button>
+                <button class="filter-btn">Design</button>
+                <button class="filter-btn">Before & After</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <!-- Gallery Items -->
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,pruning" alt="Garden Maintenance" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Expert Pruning</h3>
+                        <p class="gallery-category">Maintenance</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,flowers" alt="Floral Garden" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Seasonal Color</h3>
+                        <p class="gallery-category">Enhancement</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,courtyard" alt="Garden Design" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Courtyard Transformation</h3>
+                        <p class="gallery-category">Design</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,before,after" alt="Garden Before and After" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Complete Makeover</h3>
+                        <p class="gallery-category">Before & After</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,hedge" alt="Hedge Maintenance" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Precision Hedge Work</h3>
+                        <p class="gallery-category">Maintenance</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,patio" alt="Patio Garden" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Patio Garden Design</h3>
+                        <p class="gallery-category">Design</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,containers" alt="Container Garden" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Container Styling</h3>
+                        <p class="gallery-category">Enhancement</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,wildflower" alt="Wildflower Garden" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Wildflower Meadow</h3>
+                        <p class="gallery-category">Design</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?garden,border" alt="Garden Border" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Perennial Border</h3>
+                        <p class="gallery-category">Enhancement</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2>Client <span class="accent-blue">Testimonials</span></h2>
+                <p>What garden owners say about working with Prune and Bloom</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"Adam completely transformed our tired garden into something we're proud to show off to friends and family. His knowledge of plants is impressive, and his eye for design made all the difference."</p>
+                    <div class="testimonial-author">- Sarah W., Nantwich</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p>"As someone who struggles with mobility issues, I was finding it hard to maintain my beloved garden. Adam's sensitive approach to preserving my garden's character while making it more manageable has been a blessing."</p>
+                    <div class="testimonial-author">- Robert H., Crewe</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p>"The regular maintenance service from Prune and Bloom has made such a difference to our garden. It's like having a professional designer stop by regularly - each visit leaves the garden looking better than before."</p>
+                    <div class="testimonial-author">- Emma P., Sandbach</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to transform your garden?</h2>
+            <p>Contact me today to discuss how I can help create a beautiful, thriving outdoor space for you.</p>
+            <a href="contact.html" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <a href="index.html"><span class="prune">Prune</span> and <span class="bloom">Bloom</span></a>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 Prune and Bloom. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

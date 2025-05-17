@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Prune and Bloom | Garden Transformation Services</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #7AB730;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        /* Accent Colors */
+        .accent-green {
+            color: #7AB730; /* Lime green */
+        }
+        
+        .accent-orange {
+            color: #FF9E00; /* Squash orange */
+        }
+        
+        .accent-blue {
+            color: #4A89DC; /* Fine blue */
+        }
+        
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, #7AB730, #FF9E00, #4A89DC);
+            margin: 30px 0;
+            width: 100%;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo .bloom {
+            color: #7AB730;
+        }
+        
+        .logo .prune {
+            color: #FF9E00;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: #f5f5f5;
+            color: #7AB730;
+        }
+        
+        .active {
+            color: #7AB730;
+            font-weight: 600;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/random/1600x400/?garden,phone') no-repeat center center/cover;
+            height: 40vh;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            letter-spacing: 2px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background-color: #fff;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #f9f9f9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: #7AB730;
+            font-size: 20px;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 5px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+        
+        /* Areas Served */
+        .areas-served {
+            background-color: #f9f9f9;
+        }
+        
+        .areas-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .areas-map {
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .areas-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .areas-list {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .areas-list ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .areas-list ul li {
+            background-color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background-color: #fff;
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:after {
+            content: '+';
+            font-size: 20px;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question:after {
+            content: '-';
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 1000px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .footer-logo .bloom {
+            color: #7AB730;
+        }
+        
+        .footer-logo .prune {
+            color: #FF9E00;
+        }
+        
+        .footer-links ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-left: 20px;
+        }
+        
+        .footer-links ul li a {
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #7AB730;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links ul {
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .footer-links ul li {
+                margin: 0 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html"><span class="prune">Prune</span> and <span class="bloom">Bloom</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><span class="accent-blue">Contact</span> Us</h1>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Get In <span class="accent-green">Touch</span></h2>
+                    <p>I'd love to hear about your garden and how I can help transform it into a beautiful, thriving space. Please feel free to reach out using any of the contact methods below.</p>
+                    
+                    <div class="divider"></div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>0777 652 4565</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>adam@pruneandbloom.co.uk</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">🌎</div>
+                        <div class="contact-text">
+                            <h4>Service Area</h4>
+                            <p>South Cheshire including Crewe, Nantwich, Sandbach, Audlem, Holmes Chapel</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">⏰</div>
+                        <div class="contact-text">
+                            <h4>Working Hours</h4>
+                            <p>Monday to Friday: 8am - 6pm</p>
+                            <p>Saturday: 9am - 4pm</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send a <span class="accent-orange">Message</span></h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="maintenance">Garden Maintenance</option>
+                                <option value="enhancement">Garden Enhancement</option>
+                                <option value="design">Garden Design</option>
+                                <option value="specialized">Specialized Care</option>
+                                <option value="other">Other (Please specify)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Areas Served -->
+    <section class="areas-served">
+        <div class="container">
+            <div class="areas-header">
+                <h2>Areas <span class="accent-blue">Served</span></h2>
+                <p>Providing garden transformation services throughout South Cheshire</p>
+            </div>
+            
+            <div class="areas-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d76642.02001288952!2d-2.4988313559778574!3d53.09775411517761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a5f5c3610b9d5%3A0x347766dfbe0c4cf6!2sCrewe!5e0!3m2!1sen!2suk!4v1684147426884!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <div class="areas-list">
+                <p>Primary service areas include:</p>
+                <ul>
+                    <li>Crewe</li>
+                    <li>Nantwich</li>
+                    <li>Sandbach</li>
+                    <li>Audlem</li>
+                    <li>Holmes Chapel</li>
+                    <li>Alsager</li>
+                    <li>Middlewich</li>
+                    <li>Winsford</li>
+                    <li>Tarporley</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Frequently Asked <span class="accent-green">Questions</span></h2>
+                <p>Answers to common questions about Prune and Bloom's garden services</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">How often do you recommend garden maintenance visits?</div>
+                    <div class="faq-answer">
+                        <p>The frequency of maintenance visits depends on your garden's size, complexity, and how quickly it grows. For most gardens, a visit every 2-4 weeks during the growing season (March-October) and monthly visits during winter is ideal. I'll assess your garden's specific needs and recommend a schedule that keeps it looking its best year-round.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What happens during an initial consultation?</div>
+                    <div class="faq-answer">
+                        <p>During our first meeting, we'll walk through your garden together while I listen to your vision, concerns, and requirements. I'll assess the site conditions, existing plants, and potential opportunities for enhancement. Afterward, I'll provide recommendations tailored to your garden's needs and your personal preferences. This consultation typically takes 60-90 minutes.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Do you provide all plants for enhancement and design projects?</div>
+                    <div class="faq-answer">
+                        <p>Yes, I source all plants for enhancement and design projects, selecting quality specimens that are well-suited to your garden's conditions. I have relationships with excellent local and specialist nurseries to ensure the best selection. If you have specific plants you'd like included, I'm happy to incorporate them into the plan.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What payment methods do you accept?</div>
+                    <div class="faq-answer">
+                        <p>I accept bank transfers, cash, and checks. For ongoing maintenance services, I typically invoice monthly. For design and enhancement projects, I request a deposit before work begins, with the balance due upon completion.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Are you insured?</div>
+                    <div class="faq-answer">
+                        <p>Yes, I carry comprehensive public liability insurance and professional indemnity insurance, providing peace of mind for both you and me.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <a href="index.html"><span class="prune">Prune</span> and <span class="bloom">Bloom</span></a>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 Prune and Bloom. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for FAQ Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    faqItem.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
