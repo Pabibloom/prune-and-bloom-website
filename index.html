@@ -1,713 +1,774 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prune and Bloom | Love your Garden</title>
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #fff;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        a {
-            text-decoration: none;
-            color: #333;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: #333;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background: #7AB730;
-        }
-        
-        h1, h2, h3, h4 {
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        section {
-            padding: 60px 0;
-        }
-        
-        /* Accent Colors */
-        .accent-green {
-            color: #7AB730; /* Lime green */
-        }
-        
-        .accent-orange {
-            color: #FF9E00; /* Squash orange */
-        }
-        
-        .accent-blue {
-            color: #4A89DC; /* Fine blue */
-        }
-        
-        .divider {
-            height: 3px;
-            background: linear-gradient(90deg, #7AB730, #FF9E00, #4A89DC);
-            margin: 30px 0;
-            width: 100%;
-        }
-        
-        /* Header */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        
-        .logo .bloom {
-            color: #7AB730;
-        }
-        
-        .logo .prune {
-            color: #FF9E00;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
-            padding: 8px 15px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul li a:hover {
-            background-color: #f5f5f5;
-            color: #7AB730;
-        }
-        
-        .active {
-            color: #7AB730;
-            font-weight: 600;
-        }
-        
-        /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            background: transparent;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('page-header-about.jpg') no-repeat center center/cover;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        
-        /* Introduction Section */
-        .intro {
-            text-align: center;
-        }
-        
-        .intro h2 {
-            font-size: 36px;
-        }
-        
-        .intro p {
-            max-width: 800px;
-            margin: 0 auto 20px;
-            font-size: 18px;
-        }
-        
-        /* Services Banner */
-        .services-banner {
-            background-color: #f9f9f9;
-            padding: 20px 0;
-            text-align: center;
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-        
-        /* About Section */
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Services Section */
-        .services {
-            background-color: #f9f9f9;
-        }
-        
-        .services-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .service-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .service-card-content {
-            padding: 20px;
-        }
-        
-        .service-card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-        
-        .service-card ul {
-            list-style-position: inside;
-            margin-bottom: 20px;
-        }
-        
-        .service-card ul li {
-            margin-bottom: 8px;
-        }
-        
-        /* Specialized Care Section */
-        .specialized-care {
-            background-color: #fff;
-        }
-        
-        .care-content {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        .care-text {
-            flex: 1;
-        }
-        
-        .care-image {
-            flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .care-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Why Choose Section */
-        .why-choose {
-            background-color: #f9f9f9;
-        }
-        
-        .choose-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .choose-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .choose-item {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .choose-item i {
-            font-size: 48px;
-            color: #7AB730;
-            margin-bottom: 15px;
-        }
-        
-        .choose-item h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        
-        /* Call to Action */
-        .cta {
-            text-align: center;
-            background-color: #fff;
-        }
-        
-        .cta h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        
-        .cta .btn {
-            margin-top: 20px;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            background-color: #f9f9f9;
-        }
-        
-        .testimonials-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .testimonial-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-author {
-            font-weight: 600;
-        }
-        
-        /* Gallery */
-        .gallery-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 250px;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        /* Contact */
-        .contact {
-            background-color: #f9f9f9;
-        }
-        
-        .contact-container {
-            display: flex;
-            gap: 40px;
-        }
-        
-        .contact-info {
-            flex: 1;
-        }
-        
-        .contact-info h3 {
-            margin-bottom: 20px;
-        }
-        
-        .contact-info p {
-            margin-bottom: 10px;
-        }
-        
-        .contact-form {
-            flex: 1;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .form-group textarea {
-            height: 150px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 40px 0;
-        }
-        
-        .footer-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        
-        .footer-logo .bloom {
-            color: #7AB730;
-        }
-        
-        .footer-logo .prune {
-            color: #FF9E00;
-        }
-        
-        .footer-links ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        .footer-links ul li {
-            margin-left: 20px;
-        }
-        
-        .footer-links ul li a {
-            color: #fff;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links ul li a:hover {
-            color: #7AB730;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            margin-top: 20px;
-            border-top: 1px solid #444;
-        }
-        
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin-top: 20px;
-            }
-            
-            nav ul li {
-                margin: 0 10px;
-            }
-            
-            .about-content,
-            .care-content,
-            .contact-container {
-                flex-direction: column;
-            }
-            
-            .about-image,
-            .care-image {
-                order: -1;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .footer-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .footer-links ul {
-                justify-content: center;
-                margin-top: 20px;
-            }
-            
-            .footer-links ul li {
-                margin: 0 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            nav ul {
-                flex-direction: column;
-            }
-            
-            nav ul li {
-                margin: 5px 0;
-            }
-            
-            .hero h1 {
-                font-size: 28px;
-            }
-            
-            .intro h2,
-            section h2 {
-                font-size: 24px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prune and Bloom | Love your Garden</title>
+<style>
+/* Global Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background-color: #fff;
+color: #333;
+line-height: 1.6;
+}
+
+a {
+text-decoration: none;
+color: #333;
+}
+
+.container {
+width: 90%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+.btn {
+display: inline-block;
+background: #333;
+color: #fff;
+border: none;
+padding: 12px 24px;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+transition: all 0.3s ease;
+}
+
+.btn:hover {
+background: #7AB730;
+}
+
+h1, h2, h3, h4 {
+font-weight: 600;
+margin-bottom: 15px;
+}
+
+section {
+padding: 60px 0;
+}
+
+/* Accent Colors */
+.accent-green {
+color: #7AB730; /* Lime green */
+}
+
+.accent-orange {
+color: #FF9E00; /* Squash orange */
+}
+
+.accent-blue {
+color: #4A89DC; /* Fine blue */
+}
+
+.divider {
+height: 3px;
+background: linear-gradient(90deg, #7AB730, #FF9E00, #4A89DC);
+margin: 30px 0;
+width: 100%;
+}
+
+/* Header */
+header {
+background-color: #fff;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.header-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 0;
+}
+
+.logo {
+font-size: 24px;
+font-weight: 700;
+}
+
+.logo .bloom {
+color: #7AB730;
+}
+
+.logo .prune {
+color: #FF9E00;
+}
+
+nav ul {
+display: flex;
+list-style: none;
+}
+
+nav ul li {
+margin-left: 20px;
+}
+
+nav ul li a {
+padding: 8px 15px;
+border-radius: 4px;
+transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+background-color: #f5f5f5;
+color: #7AB730;
+}
+
+.active {
+color: #7AB730;
+font-weight: 600;
+}
+
+/* Mobile Navigation */
+.mobile-nav-toggle {
+display: none;
+background: transparent;
+border: none;
+font-size: 24px;
+cursor: pointer;
+color: #333;
+}
+
+.mobile-nav-toggle:hover {
+color: #7AB730;
+}
+
+/* Mobile menu styles */
+@media (max-width: 768px) {
+.mobile-nav-toggle {
+display: block;
+}
+
+nav {
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+background-color: #fff;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+transform: translateY(-100%);
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+z-index: 1000;
+}
+
+nav.active {
+transform: translateY(0);
+opacity: 1;
+visibility: visible;
+}
+
+nav ul {
+flex-direction: column;
+margin: 0;
+padding: 20px 0;
+}
+
+nav ul li {
+margin: 0;
+text-align: center;
+}
+
+nav ul li a {
+display: block;
+padding: 15px 20px;
+border-bottom: 1px solid #f0f0f0;
+}
+
+nav ul li:last-child a {
+border-bottom: none;
+}
+}
+
+/* Hero Section */
+.hero {
+height: 80vh;
+background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('page-header-about.jpg') no-repeat center center/cover;
+color: #fff;
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+}
+
+.hero h1 {
+font-size: 48px;
+margin-bottom: 20px;
+}
+
+.hero p {
+font-size: 20px;
+max-width: 600px;
+margin: 0 auto 30px;
+}
+
+/* Introduction Section */
+.intro {
+text-align: center;
+}
+
+.intro h2 {
+font-size: 36px;
+}
+
+.intro p {
+max-width: 800px;
+margin: 0 auto 20px;
+font-size: 18px;
+}
+
+/* Services Banner */
+.services-banner {
+background-color: #f9f9f9;
+padding: 20px 0;
+text-align: center;
+font-weight: 600;
+letter-spacing: 2px;
+}
+
+/* About Section */
+.about-content {
+display: flex;
+align-items: center;
+gap: 40px;
+}
+
+.about-text {
+flex: 1;
+}
+
+.about-text p {
+margin-bottom: 20px; /* Add spacing between paragraphs */
+}
+
+.about-text .btn {
+margin-top: 30px; /* Add extra space before the button */
+}
+
+.about-image {
+flex: 1;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.about-image img {
+width: 100%;
+height: auto;
+display: block;
+}
+
+/* Services Section */
+.services {
+background-color: #f9f9f9;
+}
+
+.services-header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+}
+
+.service-card {
+background-color: #fff;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+transform: translateY(-5px);
+}
+
+.service-card img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+}
+
+.service-card-content {
+padding: 20px;
+}
+
+.service-card h3 {
+font-size: 22px;
+margin-bottom: 10px;
+}
+
+.service-card ul {
+list-style-position: inside;
+margin-bottom: 20px;
+}
+
+.service-card ul li {
+margin-bottom: 8px;
+}
+
+/* Specialized Care Section */
+.specialized-care {
+background-color: #fff;
+}
+
+.care-content {
+display: flex;
+align-items: center;
+gap: 40px;
+}
+
+.care-text {
+flex: 1;
+}
+
+.care-image {
+flex: 1;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.care-image img {
+width: 100%;
+height: auto;
+display: block;
+}
+
+/* Why Choose Section */
+.why-choose {
+background-color: #f9f9f9;
+}
+
+.choose-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.choose-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 30px;
+margin-bottom: 40px;
+}
+
+.choose-item {
+text-align: center;
+padding: 20px;
+}
+
+.choose-item i {
+font-size: 48px;
+color: #7AB730;
+margin-bottom: 15px;
+}
+
+.choose-item h3 {
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+/* Call to Action */
+.cta {
+text-align: center;
+background-color: #fff;
+}
+
+.cta h2 {
+font-size: 28px;
+margin-bottom: 20px;
+}
+
+.cta .btn {
+margin-top: 20px;
+}
+
+/* Testimonials */
+.testimonials {
+background-color: #f9f9f9;
+}
+
+.testimonials-header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.testimonials-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+}
+
+.testimonial-card {
+background-color: #fff;
+border-radius: 10px;
+padding: 30px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.testimonial-card p {
+font-style: italic;
+margin-bottom: 20px;
+}
+
+.testimonial-author {
+font-weight: 600;
+}
+
+/* Gallery */
+.gallery-header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+
+.gallery-item {
+position: relative;
+border-radius: 10px;
+overflow: hidden;
+height: 250px;
+}
+
+.gallery-item img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+transform: scale(1.1);
+}
+
+/* Contact */
+.contact {
+background-color: #f9f9f9;
+}
+
+.contact-container {
+display: flex;
+gap: 40px;
+}
+
+.contact-info {
+flex: 1;
+}
+
+.contact-info h3 {
+margin-bottom: 20px;
+}
+
+.contact-info p {
+margin-bottom: 10px;
+}
+
+.contact-form {
+flex: 1;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 4px;
+}
+
+.form-group textarea {
+height: 150px;
+}
+
+/* Footer */
+footer {
+background-color: #333;
+color: #fff;
+padding: 40px 0;
+}
+
+.footer-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.footer-logo {
+font-size: 24px;
+font-weight: 700;
+}
+
+.footer-logo .bloom {
+color: #7AB730;
+}
+
+.footer-logo .prune {
+color: #FF9E00;
+}
+
+.footer-links ul {
+display: flex;
+list-style: none;
+}
+
+.footer-links ul li {
+margin-left: 20px;
+}
+
+.footer-links ul li a {
+color: #fff;
+transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+color: #7AB730;
+}
+
+.footer-bottom {
+text-align: center;
+padding-top: 20px;
+margin-top: 20px;
+border-top: 1px solid #444;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+.header-container {
+justify-content: space-between;
+align-items: center;
+}
+
+.about-content,
+.care-content,
+.contact-container {
+flex-direction: column;
+}
+
+.about-image,
+.care-image {
+order: -1;
+}
+
+.hero h1 {
+font-size: 36px;
+}
+
+.hero p {
+font-size: 18px;
+}
+
+.footer-container {
+flex-direction: column;
+text-align: center;
+}
+
+.footer-links ul {
+justify-content: center;
+margin-top: 20px;
+}
+
+.footer-links ul li {
+margin: 0 10px;
+}
+}
+
+@media (max-width: 480px) {
+.hero h1 {
+font-size: 28px;
+}
+
+.intro h2,
+section h2 {
+font-size: 24px;
+}
+}
+
+<script>
+function toggleMobileNav() {
+const nav = document.getElementById('mobile-nav');
+nav.classList.toggle('active');
+}
+
+// Close mobile menu when clicking on a link
+document.addEventListener('DOMContentLoaded', function() {
+const navLinks = document.querySelectorAll('#mobile-nav a');
+navLinks.forEach(link => {
+link.addEventListener('click', function() {
+document.getElementById('mobile-nav').classList.remove('active');
+});
+});
+});
+</script>
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="container header-container">
-            <div class="logo">
-                <a href="index.html"><span class="prune">Prune</span> and <span class="bloom">Bloom</span></a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<!-- Header -->
+<header id="header">
+<div class="container header-container">
+<div class="logo">
+<a href="index.html"><span class="prune">Prune</span> and <span class="bloom">Bloom</span></a>
+</div>
+<button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
+<nav id="mobile-nav">
+<ul>
+<li><a href="index.html" class="active">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Transform Your Garden</h1>
-            <p>Maintenance and design to create beautiful, outdoor spaces.</p>
-            <a href="contact.html" class="btn">Get Started</a>
-        </div>
-    </section>
+<!-- Hero Section -->
+<section class="hero">
+<div class="container">
+<h1>Transform Your Garden</h1>
+<p>Maintenance and design to create beautiful, outdoor spaces.</p>
+<a href="contact.html" class="btn">Get Started</a>
+</div>
+</section>
 
-    <!-- Introduction Section -->
-    <section class="intro">
-        <div class="container">
-            <h2>Welcome to <span class="accent-green">Prune</span> and <span class="accent-orange">Bloom</span></h2>
-            <p>Helping you achieve the most from your outdoor space</p>
-            <p>Enhance your daily life through thoughtful garden management and planting design - creating spaces that connect you with nature </p>
-        </div>
-    </section>
+<!-- Introduction Section -->
+<section class="intro">
+<div class="container">
+<h2>Welcome to <span class="accent-green">Prune</span> and <span class="accent-orange">Bloom</span></h2>
+<p>Helping you achieve the most from your outdoor space</p>
+<p>Enhance your daily life through thoughtful garden management and planting design - creating spaces that connect you with nature </p>
+</div>
+</section>
 
-    <!-- Services Banner -->
-    <div class="services-banner">
-        <div class="container">
-            <p>MAINTENANCE · ENHANCEMENT · DESIGN · PLANTING PLANS</p>
-        </div>
-    </div>
+<!-- Services Banner -->
+<div class="services-banner">
+<div class="container">
+<p>MAINTENANCE · ENHANCEMENT · DESIGN · PLANTING PLANS</p>
+</div>
+</div>
 
-    <!-- About Section Preview -->
-    <section class="about">
-        <div class="container about-content">
-            <div class="about-text">
-                <h2>My <span class="accent-green">Approach</span></h2>
-                </ul>
-                <p>You have an idea of your perfect garden.</p>
-                <p> By listening to you and considering all the elements of your space, together we can help you develop and evolve your idea into a garden space you love and feel at home in.</p>
-               </ul>
-                <a href="about.html" class="btn">Learn More</a>
-            </div>
-            <div class="about-image">
-                <img src="about-garden1.jpg" alt="Gardening Approach">
-            </div>
-        </div>
-    </section>
+<!-- About Section Preview -->
+<section class="about">
+<div class="container about-content">
+<div class="about-text">
+<h2>My <span class="accent-green">Approach</span></h2>
+<p>You have an idea of your perfect garden.</p>
+<p>By listening to you and considering all the elements of your space, together we can help you develop and evolve your idea into a garden space you love and feel at home in.</p>
+<a href="about.html" class="btn">Learn More</a>
+</div>
+<div class="about-image">
+<img src="about-garden1.jpg" alt="Gardening Approach">
+</div>
+</div>
+</section>
 
-    <!-- Services Preview -->
-    <section class="services">
-        <div class="container">
-            <div class="services-header">
-                <h2>My <span class="accent-orange">Services</span></h2>
-                <p> Garden services tailored to your needs.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <img src="image/gallery/maintenance/maintenance1.jpg" alt="Garden Maintenance">
-                    <div class="service-card-content">
-                        <h3> Garden Maintenance</h3>
-                        <p>With 20 years of horticulture experience:</p>
-                        <ul>
-                            <li>Pruning and plant care</li>
-                            <li>Focused seasonal care </li>
-                            <li>Lawn and border management</li>
-                        </ul>
-                        <a href="services.html" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img src="rose.jpg" alt="Garden Enhancement">
-                    <div class="service-card-content">
-                        <h3>Refresh & Enhancement</h3>
-                        <p>For gardens that want tweaking without redesigning:</p>
-                        <ul>
-                            <li>Strategic plant additions</li>
-                            <li>Creating focal points </li>
-                            <li>Container and planter ideas</li>
-                        </ul>
-                        <a href="services.html" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img src="image/gallery/design/designb3.jpg" alt="Garden Design">
-                    <div class="service-card-content">
-                        <h3>Design Services</h3>
-                        <p>Transform your outdoor space with comprehensive design:</p>
-                        <ul>
-                            <li>Full garden redesign</li>
-                            <li>Tailored planting plans</li>
-                            <li>Plant sourcing and installation</li>
-                        </ul>
-                        <a href="services.html" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Services Preview -->
+<section class="services">
+<div class="container">
+<div class="services-header">
+<h2>My <span class="accent-orange">Services</span></h2>
+<p> Garden services tailored to your needs.</p>
+</div>
+<div class="services-grid">
+<div class="service-card">
+<img src="image/gallery/maintenance/maintenance1.jpg" alt="Garden Maintenance">
+<div class="service-card-content">
+<h3> Garden Maintenance</h3>
+<p>With 20 years of horticulture experience:</p>
+<ul>
+<li>Pruning and plant care</li>
+<li>Focused seasonal care </li>
+<li>Lawn and border management</li>
+</ul>
+<a href="services.html" class="btn">Learn More</a>
+</div>
+</div>
+<div class="service-card">
+<img src="rose.jpg" alt="Garden Enhancement">
+<div class="service-card-content">
+<h3>Refresh & Enhancement</h3>
+<p>For gardens that want tweaking without redesigning:</p>
+<ul>
+<li>Strategic plant additions</li>
+<li>Creating focal points </li>
+<li>Container and planter ideas</li>
+</ul>
+<a href="services.html" class="btn">Learn More</a>
+</div>
+</div>
+<div class="service-card">
+<img src="image/gallery/design/designb3.jpg" alt="Garden Design">
+<div class="service-card-content">
+<h3>Design Services</h3>
+<p>Transform your outdoor space with comprehensive design:</p>
+<ul>
+<li>Full garden redesign</li>
+<li>Tailored planting plans</li>
+<li>Plant sourcing and installation</li>
+</ul>
+<a href="services.html" class="btn">Learn More</a>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-    <!-- Call to Action -->
-    <section class="cta">
-        <div class="container">
-            <h2>Is your garden living up to its potential?  </h2>
-            <p></p>
-            <p>Contact me to talk about your garden and how i might help.</p>
-            <a href="contact.html" class="btn">Get in Touch</a>
-        </div>
-    </section>
+<!-- Call to Action -->
+<section class="cta">
+<div class="container">
+<h2>Is your garden living up to its potential? </h2>
+<p></p>
+<p>Contact me to talk about your garden and how i might help.</p>
+<a href="contact.html" class="btn">Get in Touch</a>
+</div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-logo">
-                <a href="index.html">Prune and <span>Bloom</span></a>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2025 Prune and Bloom. All rights reserved.</p>
-        </div>
-    </footer>
+<!-- Footer -->
+<footer>
+<div class="container footer-container">
+<div class="footer-logo">
+<a href="index.html">Prune and <span>Bloom</span></a>
+</div>
+<div class="footer-links">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="container footer-bottom">
+<p>&copy; 2025 Prune and Bloom. All rights reserved.</p>
+</div>
+</footer>
 </body>
 </html>
